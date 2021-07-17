@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Prodotto } from './prodotto';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { constructor } from 'console';
+
 import { ProdottoRequest } from './prodotti-request';
 import { ProdottoResponse } from './prodotti-response';
 @Component({
@@ -14,7 +14,7 @@ export class AppComponent {
   prodotto = new Prodotto();
   prodotti: Prodotto[] = [];
   ;
-}
+
 
 constructor(private http : HttpClient) { }
 
@@ -40,4 +40,10 @@ constructor(private http : HttpClient) { }
       this.prodotti = r.listaProdotti;
     });
   }
+}
+
+
+function addProdotto() {
+  throw new Error('Function not implemented.');
+}
 

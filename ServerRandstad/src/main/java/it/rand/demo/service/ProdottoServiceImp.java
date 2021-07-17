@@ -1,6 +1,7 @@
 package it.rand.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -41,10 +42,14 @@ public class ProdottoServiceImp implements ProdottoService {
 	}
 
 	@Override
-	public List<Prodotto> getByDescriptionLike(String s) {
+	public List<Prodotto> getProdottobyDescrizione(String s) {
+		return pr.findByDescrizioneContaining(s);
 
-		List<Prodotto> f = pr.findDescrizioneLike(s);
-		return f;
 	}
 
+	@Override
+	public Optional<Prodotto> getProdottoById(Long idProdotto) {
+		return pr.findById(idProdotto);
+
+	}
 }

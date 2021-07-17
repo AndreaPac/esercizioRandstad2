@@ -14,7 +14,7 @@ public class Prodotto {
 	@Column
 	private String descrizione;
 	@Column
-	private long prezzo;
+	private Long prezzo;
 
 	public Prodotto(Long id, String descrizione, long prezzo) {
 		super();
@@ -43,11 +43,11 @@ public class Prodotto {
 		this.descrizione = descrizione;
 	}
 
-	public long getPrezzo() {
+	public Long getPrezzo() {
 		return prezzo;
 	}
 
-	public void setPrezzo(long prezzo) {
+	public void setPrezzo(Long prezzo) {
 		this.prezzo = prezzo;
 	}
 

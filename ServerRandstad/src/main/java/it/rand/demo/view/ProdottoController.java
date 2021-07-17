@@ -1,9 +1,14 @@
 package it.rand.demo.view;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,10 +45,26 @@ public class ProdottoController {
 		return ps.getAllProdotto();
 	}
 
-	@RequestMapping("/get-prodotto-by-like/{s}")
-	@ResponseBody
-	public List<Prodotto> getProdottoByLike(@PathVariable String s) {
-		System.out.println("Siamo in getProdottoByLike!");
-		return ps.getByDescriptionLike(s);
+	@GetMapping("/prodotto/{idProdotto}")
+	public ResponseEntity<Prodotto> getProdottoById(@PathVariable(required = true) long idProdotto) {
+
+		Optional<Prodotto> prodottoOpt = ps.getProdottoById(idProdotto);
+
+		if (prodottoOpt.isPresent()) {
+			return new ResponseEntity<>(prodottoOpt.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+
 	}
+
+	@GetMapping("/prodotto/descrizione/{descrizione}")
+
+	public ResponseEntity<List<Prodotto>> getListaProdottiByDescrizioneLike(@PathVariable String descrizione) {
+		List<Prodotto> listaProdotto = ps.getProdottobyDescrizione(descrizione);
+
+		return new ResponseEntity<List<Prodotto>>(listaProdotto, HttpStatus.OK);
+
+	}
+
 }
